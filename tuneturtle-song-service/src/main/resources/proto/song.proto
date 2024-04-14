@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_package = "me.nootnoot.songservice.generated";
+
+service song {
+  rpc getSongById(GetRequest) returns (SongDTO);
+  rpc addSong(SongDTO) returns (Empty);
+  rpc deleteSong(DeleteRequest) returns (Empty);
+  rpc getListenAmount(GetRequest) returns (ListenAmountDTO);
+  rpc addListenAmount(GetRequest) returns (Empty);
+}
+
+message GetRequest {
+  int32 songId = 1;
+}
+
+message DeleteRequest {
+  int32 songId = 1;
+}
+
+message ListenAmountDTO {
+  int32 songId = 1;
+  int64 listenAmount = 2;
+}
+
+message SongDTO {
+  int32 songId = 1;
+  string name = 2;
+  int32 artistId = 3;
+  string iconImage = 4;
+  bytes songData = 5;
+  int64 listenAmount = 6;
+}
+
+message Empty {
+
+}

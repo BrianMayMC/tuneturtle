@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: song-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: song-service
+  template:
+    metadata:
+      labels:
+        app: song-service
+    spec:
+      containers:
+      - name: song-service
+        image: brianmaymc/song-service:latest
+        ports:
+          - protocol: TCP
+            containerPort: 9090
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: artist-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: artist-service
+  template:
+    metadata:
+      labels:
+        app: artist-service
+    spec:
+      containers:
+      - name: artist-service
+        image: brianmaymc/artist-service:latest
+        ports:
+          - protocol: TCP
+            containerPort: 9080

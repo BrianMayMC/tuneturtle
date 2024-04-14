@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "me.nootnoot.artistservice.generated";
+
+service artist {
+  rpc test(Empty) returns (TestResponse);
+}
+
+message TestResponse {
+  string message = 1;
+}
+
+message Empty {
+
+}
