@@ -39,3 +39,51 @@ spec:
         ports:
           - protocol: TCP
             containerPort: 9080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: song-service-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: song-service-test
+  template:
+    metadata:
+      labels:
+        app: song-service-test
+    spec:
+      containers:
+      - name: song-service-test
+        image: brianmaymc/song-service-test:latest
+        ports:
+          - protocol: TCP
+            containerPort: 8080
+        env:
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: "/test"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-test
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rest-test
+  template:
+    metadata:
+      labels:
+        app: rest-test
+    spec:
+      containers:
+      - name: rest-test
+        image: brianmaymc/rest-test:latest
+        ports:
+          - protocol: TCP
+            containerPort: 8070
+        env:
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: "/secondtest"

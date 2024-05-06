@@ -36,17 +36,26 @@ metadata:
   name: tuneturtle-ingress
   annotations:
     # nginx.ingress.kubernetes.io/rewrite-target: /$1 #nginx ingress controller
-    nginx.ingress.kubernetes.io/enable-http2: "true"  # Enable HTTP/2 support
-    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+    # nginx.ingress.kubernetes.io/enable-http2: "true"  # Enable HTTP/2 support
+    # nginx.ingress.kubernetes.io/use-http2: "true"  # Enable HTTP/2 support
+    # nginx.ingress.kubernetes.io/backend-protocol: "gRPC"
+    kubernetes.io/ingress.class: "nginx"
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
   rules:
      - http:
         paths:
-          - path: /artist #the external path we want for our service
+          - path: /test #the external path we want for our service
             pathType: Prefix
             backend:
               service:
-                name: artist-service-svc #the service we should point to
+                name: song-service-test-svc #the service we should point to
                 port:
-                  number: 1235 
-
+                  number: 6543
+          - path: /secondtest #the external path we want for our service
+            pathType: Prefix
+            backend:
+              service:
+                name: rest-test-svc #the service we should point to
+                port:
+                  number: 6542

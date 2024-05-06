@@ -9,8 +9,7 @@ public class Test {
 
     public static void main(String[] args){
         System.out.println("Initializing channel");
-        Channel channel = ManagedChannelBuilder.forTarget("127.0.0.1:80/artist")
-                .usePlaintext()
+        Channel channel = ManagedChannelBuilder.forTarget("127.0.0.1/artist")
                 .maxInboundMessageSize(1000000000).build();
 
         System.out.println("Finished initializing");
