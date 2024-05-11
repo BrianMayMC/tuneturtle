@@ -9,7 +9,7 @@ import java.util.*;
 @Getter
 @AllArgsConstructor
 public class User {
-    private final UUID id = UUID.randomUUID();
+    private final UUID id;
     private String username;
     private final List<UUID> likedSongIds;
     private final Map<UUID, Long> songListenAmounts = new HashMap<>();
@@ -20,5 +20,6 @@ public class User {
     public User(String username){
         this.username = username;
         likedSongIds = new ArrayList<>();
+        id = UUID.randomUUID();
     }
 }

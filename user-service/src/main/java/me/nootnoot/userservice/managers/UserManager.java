@@ -1,10 +1,12 @@
 package me.nootnoot.userservice.managers;
 
+import com.mongodb.client.MongoClient;
 import me.nootnoot.userservice.entities.Playlist;
 import me.nootnoot.userservice.entities.User;
 import me.nootnoot.userservice.entities.Song;
 import me.nootnoot.userservice.messaging.sender.UserLikedSongsMessageSender;
 import me.nootnoot.userservice.messaging.sender.UserPlaylistMessageSender;
+import me.nootnoot.userservice.storage.MongoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +16,24 @@ import java.util.UUID;
 
 @Service
 public class UserManager {
-    private final List<User> users = new ArrayList<>();
+    private final List<User> users;
+    private final MongoManager mongoManager;
 
     @Autowired
     private UserPlaylistMessageSender messageHandler;
     @Autowired
     private UserLikedSongsMessageSender userLikedSongsMessageSender;
 
+    public UserManager(){
+        mongoManager = new MongoManager();
+        users = mongoManager.getUsers();
+    }
+
     public void addLikedSong(String username, UUID songId){
         users.forEach(user -> {
             if(user.getUsername().equalsIgnoreCase(username)){
                 user.getLikedSongIds().add(songId);
+                mongoManager.updateUser(user);
             }
         });
     }
@@ -47,12 +56,19 @@ public class UserManager {
         return new ArrayList<>();
     }
 
-    public void add(User user){
-        users.add(user);
+    public User getUser(String username){
+        for(User user : users){
+            if(user.getUsername().equalsIgnoreCase(username)){
+                return user;
+            }
+        }
+        return null;
     }
 
-    public void delete(UUID id){
-        users.removeIf(user -> user.getId().equals(id));
+    public void add(User user){
+        System.out.println("adding user");
+        users.add(user);
+        mongoManager.addUser(user);
     }
 
     public void makeArtist(String username, String artistName, String artistProfilePicture){
@@ -61,6 +77,7 @@ public class UserManager {
                 user.setArtist(true);
                 user.setArtistName(artistName);
                 user.setArtistProfilePicture(artistProfilePicture);
+                mongoManager.updateUser(user);
             }
         });
     }
@@ -69,6 +86,7 @@ public class UserManager {
         for (User user : users) {
             if(user.getUsername().equalsIgnoreCase(username)){
                 user.getSongListenAmounts().put(songId, user.getSongListenAmounts().getOrDefault(songId, 0L) + 1);
+                mongoManager.updateUser(user);
             }
         }
     }

@@ -34,10 +34,6 @@ public class UserController {
         userManager.add(new User(request.getUsername()));
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable String id){
-        userManager.delete(UUID.fromString(id));
-    }
 
     @GetMapping("/liked/{username}")
     public GetLikedSongsResponse getLikedSongs(@PathVariable String username){

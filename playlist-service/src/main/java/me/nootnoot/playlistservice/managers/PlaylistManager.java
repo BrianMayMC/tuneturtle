@@ -1,8 +1,10 @@
 package me.nootnoot.playlistservice.managers;
 
+import com.mongodb.client.MongoClient;
 import me.nootnoot.playlistservice.entities.Playlist;
 import me.nootnoot.playlistservice.entities.Song;
 import me.nootnoot.playlistservice.messaging.sender.GetPlaylistSongsSender;
+import me.nootnoot.playlistservice.storage.MongoManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,22 +14,33 @@ import java.util.UUID;
 
 @Service
 public class PlaylistManager {
-    private final List<Playlist> playlists = new ArrayList<>();
+    private final List<Playlist> playlists;
 
-    @Autowired private GetPlaylistSongsSender getPlaylistSongsSender;
+    private final MongoManager mongoManager;
+
+    @Autowired
+    private GetPlaylistSongsSender getPlaylistSongsSender;
+
+    public PlaylistManager(){
+        mongoManager = new MongoManager();
+        playlists = mongoManager.getAll();
+    }
 
     public void add(Playlist playlist){
         playlists.add(playlist);
+        mongoManager.add(playlist);
     }
 
     public void remove(UUID id){
         playlists.removeIf(playlist -> playlist.getId().equals(id));
+        mongoManager.delete(id);
     }
 
     public void addSong(UUID playlistId, UUID songId){
         for (Playlist playlist : playlists) {
             if(playlist.getId().equals(playlistId)){
                 playlist.getSongIds().add(songId);
+                mongoManager.update(playlist);
             }
         }
     }
@@ -36,6 +49,7 @@ public class PlaylistManager {
         for (Playlist playlist : playlists) {
             if(playlist.getId().equals(playlistId)){
                 playlist.getSongIds().remove(songId);
+                mongoManager.update(playlist);
             }
         }
     }

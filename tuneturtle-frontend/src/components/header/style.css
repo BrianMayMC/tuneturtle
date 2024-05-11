@@ -1,0 +1,35 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  border-radius: 160px;
+  background-color: #3C5A14;
+  border: 1px solid #58920C;
+  width: 65%;
+  margin: auto;
+  margin-top: 50px;
+  height: 100px;
+  gap: 80px;
+}
+
+
+.header-text {
+  background: transparent;
+  margin-top: auto;
+  margin-bottom: auto;
+  color: #FFF;
+  font-size: 30px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.header-logo {
+  width: 80px;
+  height: 80px;
+  background: #2E4410;
+  margin-left: 15px;
+  border-radius: 160px;
+  border: 1px solid #58920C;
+  margin-top: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+}

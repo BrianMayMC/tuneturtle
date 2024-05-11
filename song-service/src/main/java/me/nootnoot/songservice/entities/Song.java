@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.UUID;
 
 @Getter
+@AllArgsConstructor
 public class Song {
-    private final UUID id = UUID.randomUUID();
+    private final UUID id;
     private final UUID artistId;
     private final String picture;
     private final String title;
@@ -22,5 +23,6 @@ public class Song {
         this.picture = picture;
         this.title = title;
         this.songData = songData;
+        id = UUID.randomUUID();
     }
 }

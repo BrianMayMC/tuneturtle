@@ -10,8 +10,15 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 public class Playlist implements Serializable {
-    private final UUID id = UUID.randomUUID();
+    private final UUID id;
     private String name;
     private UUID ownerId;
     private List<UUID> songIds;
+
+    public Playlist(String name, UUID ownerId, List<UUID> songIds){
+        this.name = name;
+        this.ownerId = ownerId;
+        this.songIds = songIds;
+        id = UUID.randomUUID();
+    }
 }

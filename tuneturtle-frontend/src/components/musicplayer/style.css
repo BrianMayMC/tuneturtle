@@ -1,0 +1,89 @@
+.music-player-container {
+  background-color: #3C5A14;
+  height: 170px;
+  margin-top: 23px;
+  flex: 1;
+  border: 1px solid #58920C;
+  border-bottom: none;
+  display: flex;
+}
+
+.music-player-current-container {
+  width: 250px;
+  height: 80px;
+  background-color: #354D15;
+  border: 1px solid #496B1C;
+  margin-top: 10px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.music-player-current-image {
+  height: 40px;
+  width: 40px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5px;
+}
+
+.music-player-current-subcontainer {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.music-player-current-heart-image {
+  height: 35px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 15px;
+  width: 35px;
+}
+
+.music-player-current-heart-image:hover {
+  cursor: pointer;
+}
+
+.music-player-current-title {
+  color: #FFF;
+  font-size: 16px;
+  white-space: nowrap;
+  background: transparent;
+}
+
+.music-player-current-subtitle {
+  color: #BFBFBF;
+  font-size: 12px; 
+}
+
+.music-player-controls-container {
+  background-color: #354D15;
+  border: 1px solid #496B1C;
+  border-radius: 63px;
+  width: 700px;
+  height: 70px;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+
+.music-player-controls {
+  margin: auto;
+  margin-right: 600px;
+}
+
+.music-player-controls-image {
+  height: 40px;
+  width: 40px;
+}
+
+.music-player-controls-image:hover {
+  cursor: pointer;
+}
