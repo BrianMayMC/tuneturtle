@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: song-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: song-service
+  template:
+    metadata:
+      labels:
+        app: song-service
+    spec:
+      containers:
+      - name: song-service
+        image: devnootnoot/song-service:latest
+        ports:
+          - protocol: TCP
+            containerPort: 8080
+        env:
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: "/song"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: devnootnoot/user-service:latest
+        ports:
+          - protocol: TCP
+            containerPort: 8081
+        env:
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: "/user"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playlist-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: playlist-service
+  template:
+    metadata:
+      labels:
+        app: playlist-service
+    spec:
+      containers:
+      - name: playlist-service
+        image: devnootnoot/playlist-service:latest
+        ports:
+          - protocol: TCP
+            containerPort: 8082
+        env:
+          - name: SERVER_SERVLET_CONTEXT_PATH
+            value: "/playlist"

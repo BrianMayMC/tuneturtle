@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tuneturtle-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+     - http:
+        paths:
+          - path: /song #the external path we want for our service
+            pathType: Prefix
+            backend:
+              service:
+                name: song-service-svc #the service we should point to
+                port:
+                  number: 1111
+          - path: /user #the external path we want for our service
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service-svc #the service we should point to
+                port:
+                  number: 1112
+          - path: /playlist #the external path we want for our service
+            pathType: Prefix
+            backend:
+              service:
+                name: playlist-service-svc #the service we should point to
+                port:
+                  number: 1113
