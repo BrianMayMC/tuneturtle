@@ -1,0 +1,16 @@
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\entities\Song.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\controllers\SongController.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\controllers\responses\GetAllSongsResponse.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\obj\GetLikedSongsMsg.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\obj\GetPlaylistSongsResponseObj.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\sender\GetUserListenAmountSender.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\SongServiceApplication.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\obj\GetListenAmountRequestResponseMsg.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\obj\GetPlaylistSongsRequestObj.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\controllers\responses\GetSongResponse.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\obj\GetListenAmountsRequestMsg.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\receiver\GetPlaylistSongsReceiver.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\messaging\receiver\UserLikedSongsMessageReceiver.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\controllers\requests\CreateSongRequest.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\storage\MongoManager.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\song-service\src\main\java\me\nootnoot\songservice\managers\SongManager.java

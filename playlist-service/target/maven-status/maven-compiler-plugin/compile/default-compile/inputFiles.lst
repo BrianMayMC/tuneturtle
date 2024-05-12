@@ -1,0 +1,15 @@
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\managers\PlaylistManager.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\messaging\obj\GetPlaylistSongsResponseObj.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\PlaylistServiceApplication.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\entities\Playlist.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\controllers\requests\PlaylistCreateRequest.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\controllers\responses\GetPlaylistSongsResponse.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\controllers\PlaylistController.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\controllers\responses\GetPlaylistsResponse.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\entities\Song.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\messaging\receiver\UserPlaylistMessageReceiver.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\controllers\requests\AddSongToPlaylistRequest.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\storage\MongoManager.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\messaging\obj\GetPlaylistSongsRequestObj.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\controllers\requests\RemoveSongFromPlaylistRequest.java
+C:\Users\msint\OneDrive\Bureaublad\tune-turtle\tuneturtle\playlist-service\src\main\java\me\nootnoot\playlistservice\messaging\sender\GetPlaylistSongsSender.java
