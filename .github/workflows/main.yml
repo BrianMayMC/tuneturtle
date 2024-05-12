@@ -30,5 +30,7 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/user-service:latest
 
     - name: Deploy to Minikube
+      env:
+        KUBECONFIG: .kube/config
       run: |
-        kubectl apply -f kubernetes/ --validate=false
+        kubectl apply -f kubernetes/
