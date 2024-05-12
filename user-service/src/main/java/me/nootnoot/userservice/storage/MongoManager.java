@@ -20,7 +20,7 @@ public class MongoManager {
 
     public MongoManager(){
         MongoClientSettings settings = MongoClientSettings.builder()
-                .applyConnectionString(new ConnectionString("mongodb://localhost:27017/"))
+                .applyConnectionString(new ConnectionString("mongodb://mongodb-service:27017/"))
                 .uuidRepresentation(UuidRepresentation.STANDARD).build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("users");
