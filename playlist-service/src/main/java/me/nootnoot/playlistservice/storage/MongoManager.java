@@ -19,8 +19,9 @@ public class MongoManager {
     private final MongoCollection<Document> playlistCollection;
 
     public MongoManager(){
+        String url = System.getenv("MONGODB_URL");
         MongoClientSettings settings = MongoClientSettings.builder()
-                .applyConnectionString(new ConnectionString("mongodb://mongodb-service:27017/"))
+                .applyConnectionString(new ConnectionString(url != null ? url : "mongodb://localhost:27017/"))
                 .uuidRepresentation(UuidRepresentation.STANDARD).build();
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("playlists");

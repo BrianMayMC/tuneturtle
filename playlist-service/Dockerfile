@@ -4,6 +4,7 @@ COPY . .
 RUN mvn package
 
 FROM openjdk:17
+ENV MONGODB_URL mongodb://mongodb-service:27017/
 COPY --from=build /usr/src/app/target/playlist-service-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8082
 ENTRYPOINT ["java", "-jar", "app.jar"]
