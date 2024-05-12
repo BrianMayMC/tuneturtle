@@ -31,7 +31,12 @@ jobs:
 
     - name: Deploy to Kubernetes
       env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        KUBE_SERVER: ${{ secrets.KUBE_SERVER }}
+        KUBE_CA_CERT: ${{ secrets.KUBE_CA_CERT }}
+        KUBE_CLIENT_CERT: ${{ secrets.KUBE_CLIENT_CERT }}
+        KUBE_CLIENT_KEY: ${{ secrets.KUBE_CLIENT_KEY }}
       run: |
-        echo $KUBE_CONFIG_DATA | base64 --decode > kubeconfig.yaml
-        kubectl apply -f kubernetes/ --kubeconfig kubeconfig.yaml
+        echo $KUBE_CA_CERT | base64 --decode > ca.crt
+        echo $KUBE_CLIENT_CERT | base64 --decode > client.crt
+        echo $KUBE_CLIENT_KEY | base64 --decode > client.key
+        kubectl apply -f kubernetes/ --server=$KUBE_SERVER --certificate-authority=ca.crt --client-certificate=client.crt --client-key=client.key
