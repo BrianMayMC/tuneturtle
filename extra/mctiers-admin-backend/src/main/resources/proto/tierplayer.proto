@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option java_package = "me.nootnoot.mctiersadminbackend.generated";
+
+service tierplayer {
+  rpc get(GetRequest) returns (TierPlayerDTO);
+  rpc getAll(Empty) returns (TierPlayerDTOList);
+  rpc save(TierPlayerDTO) returns (Empty);
+}
+
+message TierPlayerDTOList {
+  repeated TierPlayerDTO list = 1;
+}
+
+message TierPlayerDTO {
+  string uuid = 1;
+  string username = 2;
+  string region = 3;
+  string discordId = 4;
+  map<string, string> tiers = 5;
+  map<string, string> retiredTiers = 6;
+  map<string, string> peakTiers = 7;
+}
+
+
+message GetRequest {
+  string uuid = 1;
+}
+
+message Empty {
+
+}
+
