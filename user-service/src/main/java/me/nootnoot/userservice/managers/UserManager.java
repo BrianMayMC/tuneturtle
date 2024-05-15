@@ -1,6 +1,5 @@
 package me.nootnoot.userservice.managers;
 
-import com.mongodb.client.MongoClient;
 import me.nootnoot.userservice.entities.Playlist;
 import me.nootnoot.userservice.entities.User;
 import me.nootnoot.userservice.entities.Song;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -31,7 +31,7 @@ public class UserManager {
 
     public void addLikedSong(String username, UUID songId){
         users.forEach(user -> {
-            if(user.getUsername().equalsIgnoreCase(username)){
+            if(user.getName().equalsIgnoreCase(username)){
                 user.getLikedSongIds().add(songId);
                 mongoManager.updateUser(user);
             }
@@ -39,8 +39,11 @@ public class UserManager {
     }
 
     public List<Song> getLikedSongs(String username){
+        System.out.println("username: " + username);
         for(User user : users){
-            if(user.getUsername().equalsIgnoreCase(username)){
+            System.out.println(user.getName());
+            if(user.getName().equalsIgnoreCase(username)){
+                System.out.println("returning");
                 return userLikedSongsMessageSender.getLikedSongs(user.getId(), user.getLikedSongIds());
             }
         }
@@ -49,7 +52,7 @@ public class UserManager {
 
     public List<Playlist> getPlaylists(String username){
         for(User user : users){
-            if(user.getUsername().equalsIgnoreCase(username)){
+            if(user.getName().equalsIgnoreCase(username)){
                 return messageHandler.getUserPlaylists(user.getId());
             }
         }
@@ -58,22 +61,16 @@ public class UserManager {
 
     public User getUser(String username){
         for(User user : users){
-            if(user.getUsername().equalsIgnoreCase(username)){
+            if(user.getName().equalsIgnoreCase(username)){
                 return user;
             }
         }
         return null;
     }
 
-    public void add(User user){
-        System.out.println("adding user");
-        users.add(user);
-        mongoManager.addUser(user);
-    }
-
     public void makeArtist(String username, String artistName, String artistProfilePicture){
         users.forEach(user -> {
-            if(user.getUsername().equalsIgnoreCase(username)){
+            if(user.getName().equalsIgnoreCase(username)){
                 user.setArtist(true);
                 user.setArtistName(artistName);
                 user.setArtistProfilePicture(artistProfilePicture);
@@ -84,7 +81,7 @@ public class UserManager {
 
     public void addListen(String username, UUID songId) {
         for (User user : users) {
-            if(user.getUsername().equalsIgnoreCase(username)){
+            if(user.getName().equalsIgnoreCase(username)){
                 user.getSongListenAmounts().put(songId, user.getSongListenAmounts().getOrDefault(songId, 0L) + 1);
                 mongoManager.updateUser(user);
             }
@@ -105,10 +102,19 @@ public class UserManager {
 
     public boolean isArtist(String username){
         for(User user : users){
-            if(user.getUsername().equalsIgnoreCase(username) && user.isArtist()){
+            if(user.getName().equalsIgnoreCase(username) && user.isArtist()){
                 return true;
             }
         }
         return false;
+    }
+
+
+    public Optional<User> findByName(String name){
+        return mongoManager.findUserByName(name);
+    }
+
+    public void save(User user){
+        mongoManager.saveUser(user);
     }
 }
