@@ -32,6 +32,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    needs: build
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -42,10 +44,12 @@ jobs:
     - name: Start ZAP daemon
       run: |
         docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://127.0.0.1
-        
+
   
   deploy:
     runs-on: ubuntu-latest
+
+    needs: test
 
     steps:
     - name: Deploy to Minikube
