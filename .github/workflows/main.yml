@@ -28,9 +28,39 @@ jobs:
         docker push ${{ secrets.DOCKER_USERNAME }}/song-service:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/playlist-service:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/user-service:latest
+  
+  test:
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Start ZAP daemon
+      run: docker run -d --name zap -u zap -p 8070:8070 -i owasp/zap2docker-stable zap.sh -daemon -host 0.0.0.0 -port 8070
+
+    - name: Run ZAP scan
+      run: |
+        docker exec zap zap-cli quick-scan --self-contained --start-options '-config api.addrs.addr.name=.* -config api.addrs.addr.regex=true' http://127.0.0.1
+
+    - name: Generate ZAP report
+      run: |
+        docker exec zap zap-cli report -o zap-report.html -f html
+        docker cp zap:/zap/zap-report.html .
+
+    - name: Upload ZAP report
+      uses: actions/upload-artifact@v2
+      with:
+        name: ZAP Report
+        path: zap-report.html
+  
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Deploy to Minikube
       env:
         KUBECONFIG: .kube/config
       run: |
         kubectl apply -f kubernetes/ --validate=false
+  
