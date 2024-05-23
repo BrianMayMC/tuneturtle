@@ -13,16 +13,16 @@ import java.util.UUID;
 
 @Service
 public class SongManager {
-    private final List<Song> songs;
+    private final List<Song> songs = new ArrayList<>();
 
     @Autowired
     private GetUserListenAmountSender getUserListenAmountSender;
 
-    private final MongoManager mongoManager;
+//    private final MongoManager mongoManager;
 
     public SongManager(){
-        mongoManager = new MongoManager();
-        songs = mongoManager.getAll();
+//        mongoManager = new MongoManager();
+//        songs = mongoManager.getAll();
     }
 
     public Song getSong(String title){
@@ -58,12 +58,12 @@ public class SongManager {
 
     public void addSong(Song song){
         songs.add(song);
-        mongoManager.add(song);
+//        mongoManager.add(song);
     }
 
     public void deleteSong(Song song){
         songs.remove(song);
-        mongoManager.delete(song);
+//        mongoManager.delete(song);
     }
 
 }
