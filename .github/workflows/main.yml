@@ -25,18 +25,25 @@ jobs:
         path: ~/.sonar/cache
         key: ${{ runner.os }}-sonar
         restore-keys: ${{ runner.os }}-sonar
+        
     - name: Cache Maven packages
       uses: actions/cache@v3
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
-    - name: Build and analyze
+
+    - name: Build and analyze with SonarQube
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=BrianMayMC_BrianMayMC
-      working-directory: ./song-service
+      #run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=BrianMayMC_BrianMayMC
+      run: |
+        for dir in song-service playlist-service user-service; do
+          cd $dir
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=BrianMayMC_BrianMayMC
+          cd ..
+        done
 
     - name: Build and Push Docker images
       run: |
