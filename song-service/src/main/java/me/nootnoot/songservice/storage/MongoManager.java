@@ -20,6 +20,7 @@ public class MongoManager {
 
     public MongoManager(){
         String url = System.getenv("MONGODB_URL");
+        System.out.println("Using MONGODB URL: " + url);
         MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(url != null ? url : "mongodb://localhost:27017/"))
                 .uuidRepresentation(UuidRepresentation.STANDARD).build();
