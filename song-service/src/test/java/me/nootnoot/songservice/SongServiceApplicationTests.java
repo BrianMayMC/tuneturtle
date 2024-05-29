@@ -43,8 +43,8 @@ class SongServiceApplicationTests {
 	private Song song2;
 	@BeforeEach
 	public void setUp() {
-		song1 = new Song(UUID.randomUUID(), "picture_data", "Song 1", new byte[]{});
-		song2 = new Song(UUID.randomUUID(), "picture_data", "Song 2", new byte[]{});
+		song1 = new Song(UUID.randomUUID(), "picture_data", "Song 1", "");
+		song2 = new Song(UUID.randomUUID(), "picture_data", "Song 2", "");
 
 		songList = new ArrayList<>();
 		songList.add(song1);
@@ -111,7 +111,7 @@ class SongServiceApplicationTests {
 
 	@Test
 	public void testAddSong() {
-		Song newSong = new Song(UUID.randomUUID(), "picture_data", "New Song", new byte[]{});
+		Song newSong = new Song(UUID.randomUUID(), "picture_data", "New Song", "");
 
 		songManager.addSong(newSong);
 

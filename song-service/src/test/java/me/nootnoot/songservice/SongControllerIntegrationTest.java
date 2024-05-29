@@ -45,8 +45,8 @@ public class SongControllerIntegrationTest {
     public void testGetAllSongs() throws Exception {
         // Mock data
         List<Song> songs = new ArrayList<>();
-        songs.add(new Song(UUID.randomUUID(), UUID.randomUUID(), "picture1", "Song1", new byte[]{}, 0));
-        songs.add(new Song(UUID.randomUUID(), UUID.randomUUID(), "picture2", "Song2", new byte[]{}, 0));
+        songs.add(new Song(UUID.randomUUID(), UUID.randomUUID(), "picture1", "Song1", "", 0));
+        songs.add(new Song(UUID.randomUUID(), UUID.randomUUID(), "picture2", "Song2", "", 0));
 
         // Mock service method
         when(songManager.getAllSongs()).thenReturn(songs);
@@ -62,7 +62,7 @@ public class SongControllerIntegrationTest {
     public void testGetSong() throws Exception {
         // Mock data
         UUID songId = UUID.randomUUID();
-        Song song = new Song(songId, UUID.randomUUID(), "picture", "Song", new byte[]{}, 0);
+        Song song = new Song(songId, UUID.randomUUID(), "picture", "Song", "", 0);
 
         // Mock service method
         when(songManager.getSong("Song")).thenReturn(song);
@@ -77,7 +77,7 @@ public class SongControllerIntegrationTest {
     @Test
     public void testAddSong() throws Exception {
         // Mock request body
-        CreateSongRequest request = new CreateSongRequest(UUID.randomUUID(), "picture", "New Song", new byte[]{});
+        CreateSongRequest request = new CreateSongRequest(UUID.randomUUID(), "picture", "New Song", "");
 
         // Perform POST request
         mockMvc.perform(post("/api/song/")

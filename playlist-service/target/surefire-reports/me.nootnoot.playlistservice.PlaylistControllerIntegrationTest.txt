@@ -1,9 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: me.nootnoot.playlistservice.PlaylistControllerIntegrationTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 9.745 s <<< FAILURE! -- in me.nootnoot.playlistservice.PlaylistControllerIntegrationTest
-me.nootnoot.playlistservice.PlaylistControllerIntegrationTest.testGetPlaylistSongs -- Time elapsed: 5.063 s <<< ERROR!
-jakarta.servlet.ServletException: Request processing failed: java.lang.NullPointerException: Cannot invoke "org.springframework.amqp.core.Message.getBody()" because "receivedMessage" is null
+Tests run: 6, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 4.182 s <<< FAILURE! -- in me.nootnoot.playlistservice.PlaylistControllerIntegrationTest
+me.nootnoot.playlistservice.PlaylistControllerIntegrationTest.testGetPlaylistSongs -- Time elapsed: 0.031 s <<< ERROR!
+jakarta.servlet.ServletException: Request processing failed: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: no further information
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1022)
 	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
 	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
@@ -29,10 +29,22 @@ jakarta.servlet.ServletException: Request processing failed: java.lang.NullPoint
 	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-Caused by: java.lang.NullPointerException: Cannot invoke "org.springframework.amqp.core.Message.getBody()" because "receivedMessage" is null
-	at me.nootnoot.playlistservice.messaging.sender.GetPlaylistSongsSender.getPlaylistSongs(GetPlaylistSongsSender.java:42)
-	at me.nootnoot.playlistservice.managers.PlaylistManager.getSongs(PlaylistManager.java:75)
-	at me.nootnoot.playlistservice.controllers.PlaylistController.getSongs(PlaylistController.java:50)
+Caused by: org.springframework.amqp.AmqpConnectException: java.net.ConnectException: Connection refused: no further information
+	at org.springframework.amqp.rabbit.support.RabbitExceptionTranslator.convertRabbitAccessException(RabbitExceptionTranslator.java:61)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:622)
+	at org.springframework.amqp.rabbit.connection.CachingConnectionFactory.createConnection(CachingConnectionFactory.java:727)
+	at org.springframework.amqp.rabbit.connection.ConnectionFactoryUtils.createConnection(ConnectionFactoryUtils.java:257)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doExecute(RabbitTemplate.java:2249)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2222)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.execute(RabbitTemplate.java:2202)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.useDirectReplyTo(RabbitTemplate.java:1064)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.evaluateFastReplyTo(RabbitTemplate.java:1037)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.doSendAndReceive(RabbitTemplate.java:1912)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.sendAndReceive(RabbitTemplate.java:1641)
+	at org.springframework.amqp.rabbit.core.RabbitTemplate.sendAndReceive(RabbitTemplate.java:1634)
+	at me.nootnoot.playlistservice.messaging.sender.GetPlaylistSongsSender.getPlaylistSongs(GetPlaylistSongsSender.java:41)
+	at me.nootnoot.playlistservice.managers.PlaylistManager.getSongs(PlaylistManager.java:83)
+	at me.nootnoot.playlistservice.controllers.PlaylistController.getSongs(PlaylistController.java:55)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -47,4 +59,18 @@ Caused by: java.lang.NullPointerException: Cannot invoke "org.springframework.am
 	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
 	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
 	... 24 more
+Caused by: java.net.ConnectException: Connection refused: no further information
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(NioSocketImpl.java:542)
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:597)
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327)
+	at java.base/java.net.Socket.connect(Socket.java:633)
+	at com.rabbitmq.client.impl.SocketFrameHandlerFactory.create(SocketFrameHandlerFactory.java:61)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1249)
+	at com.rabbitmq.client.ConnectionFactory.newConnection(ConnectionFactory.java:1198)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connectAddresses(AbstractConnectionFactory.java:668)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.connect(AbstractConnectionFactory.java:637)
+	at org.springframework.amqp.rabbit.connection.AbstractConnectionFactory.createBareConnection(AbstractConnectionFactory.java:584)
+	... 50 more
 

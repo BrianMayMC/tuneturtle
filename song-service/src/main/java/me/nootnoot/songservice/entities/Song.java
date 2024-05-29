@@ -14,11 +14,11 @@ public class Song {
     private final UUID artistId;
     private final String picture;
     private final String title;
-    private final byte[] songData;
+    private final String songData;
 
     @Setter private int listenAmount = 0;
 
-    public Song(UUID artistId, String picture, String title, byte[] songData) {
+    public Song(UUID artistId, String picture, String title, String songData) {
         this.artistId = artistId;
         this.picture = picture;
         this.title = title;

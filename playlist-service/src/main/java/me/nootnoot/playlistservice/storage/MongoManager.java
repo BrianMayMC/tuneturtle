@@ -28,8 +28,18 @@ public class MongoManager {
         MongoClient mongoClient = MongoClients.create(settings);
         MongoDatabase database = mongoClient.getDatabase("playlists");
         playlistCollection = database.getCollection("playlist-data");
+
+        addDummyData();
     }
 
+
+    private void addDummyData(){
+        Document document = playlistCollection.find(new Document("name", "Dummy Playlist")).first();
+
+        if(document == null){
+            add(new Playlist("Dummy Playlist", UUID.randomUUID(), List.of(UUID.fromString("aeafc20b-7250-4c16-a3e3-bbcfc89261b7"))));
+        }
+    }
 
     public void add(Playlist playlist){
         playlistCollection.insertOne(new Document("_id", playlist.getId())

@@ -12,5 +12,5 @@ public class CreateSongRequest {
     private UUID artistId;
     private String pictureData;
     private String title;
-    private byte[] songData;
+    private String songData;
 }

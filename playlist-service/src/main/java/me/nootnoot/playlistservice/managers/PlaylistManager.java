@@ -86,7 +86,7 @@ public class PlaylistManager {
         return new ArrayList<>();
     }
 
-    public Collection<Playlist> getAll() {
+    public List<Playlist> getAll() {
         initializePlaylists();
         return playlists;
     }

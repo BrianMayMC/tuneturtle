@@ -12,5 +12,5 @@ public class Song {
     private UUID artistId;
     private String picture;
     private String title;
-    private byte[] songData;
+    private String songData;
 }

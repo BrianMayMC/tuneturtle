@@ -30,6 +30,19 @@ public class MongoManager {
 
         MongoDatabase database = mongoClient.getDatabase("songs");
         songCollection = database.getCollection("song-data");
+
+        addDummyData();
+    }
+
+    public void clear(){
+        songCollection.find().forEach(songCollection::deleteOne);
+    }
+
+    public void addDummyData(){
+        Document document = songCollection.find(new Document("title", "Dream On")).first();
+        if(document == null){
+            add(new Song(UUID.randomUUID(), "picture", "Dream On", ""));
+        }
     }
 
 
@@ -61,7 +74,7 @@ public class MongoManager {
         songCollection.find().forEach(document -> {
             songs.add(new Song(document.get("_id", UUID.class), document.get("artistId", UUID.class),
                     document.getString("picture"), document.getString("title"),
-                    (byte[])document.get("song-data"), 0));
+                    document.getString("song-data"), 0));
         });
         return songs;
     }

@@ -45,6 +45,11 @@ public class PlaylistController {
         return new GetPlaylistsResponse(playlistManager.getPlaylists(UUID.fromString(id)));
     }
 
+    @GetMapping("/")
+    public GetPlaylistsResponse getPlaylists(){
+        return new GetPlaylistsResponse(playlistManager.getAll());
+    }
+
     @GetMapping("/songs/{id}")
     public GetPlaylistSongsResponse getSongs(@PathVariable String id){
         return new GetPlaylistSongsResponse(playlistManager.getSongs(UUID.fromString(id)));
