@@ -1,0 +1,5 @@
+me.nootnoot.songservice.managers.SongManager#deleteSong(Lme/nootnoot/songservice/entities/Song;)V
+me.nootnoot.songservice.managers.SongManager#initializeSongs()V
+==
+remove java.util.List#remove(Ljava/lang/Object;)Z
+delete me.nootnoot.songservice.storage.MongoManager#delete(Lme/nootnoot/songservice/entities/Song;)V

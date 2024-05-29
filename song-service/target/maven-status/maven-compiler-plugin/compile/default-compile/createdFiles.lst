@@ -1,1 +1,16 @@
+me\nootnoot\songservice\messaging\receiver\GetPlaylistSongsReceiver.class
 me\nootnoot\songservice\storage\MongoManager.class
+me\nootnoot\songservice\messaging\obj\GetLikedSongsMsg.class
+me\nootnoot\songservice\controllers\responses\GetSongResponse.class
+me\nootnoot\songservice\messaging\sender\GetUserListenAmountSender.class
+me\nootnoot\songservice\messaging\receiver\UserLikedSongsMessageReceiver.class
+me\nootnoot\songservice\messaging\obj\GetListenAmountRequestResponseMsg.class
+me\nootnoot\songservice\controllers\responses\GetAllSongsResponse.class
+me\nootnoot\songservice\managers\SongManager.class
+me\nootnoot\songservice\messaging\obj\GetPlaylistSongsRequestObj.class
+me\nootnoot\songservice\entities\Song.class
+me\nootnoot\songservice\controllers\requests\CreateSongRequest.class
+me\nootnoot\songservice\SongServiceApplication.class
+me\nootnoot\songservice\controllers\SongController.class
+me\nootnoot\songservice\messaging\obj\GetPlaylistSongsResponseObj.class
+me\nootnoot\songservice\messaging\obj\GetListenAmountsRequestMsg.class

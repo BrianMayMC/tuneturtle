@@ -1,0 +1,6 @@
+me.nootnoot.songservice.storage.MongoManager#getAll()Ljava/util/List;
+java.util.ArrayList#<init>()V
+java.util.ArrayList#instance-init#
+==
+forEach java.lang.Iterable#forEach(Ljava/util/function/Consumer;)V
+find com.mongodb.client.MongoCollection#find()Lcom/mongodb/client/FindIterable;

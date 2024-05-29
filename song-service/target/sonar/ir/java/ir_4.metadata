@@ -1,0 +1,4 @@
+me.nootnoot.songservice.managers.SongManager#getSong(Ljava/lang/String;)Lme/nootnoot/songservice/entities/Song;
+me.nootnoot.songservice.managers.SongManager#initializeSongs()V
+==
+getListenAmount me.nootnoot.songservice.managers.SongManager#getListenAmount(Ljava/util/UUID;)I
