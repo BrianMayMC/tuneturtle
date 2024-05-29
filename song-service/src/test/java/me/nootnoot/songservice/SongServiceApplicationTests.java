@@ -10,7 +10,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +25,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)
 class SongServiceApplicationTests {
 
-	@Mock
+	@MockBean
 	private GetUserListenAmountSender getUserListenAmountSender;
 
-	@Mock
+	@MockBean
 	private MongoManager mongoManager;
 
-	@InjectMocks
+	@Autowired
 	private SongManager songManager;
 
 	private List<Song> songList;
@@ -47,8 +51,9 @@ class SongServiceApplicationTests {
 		songList.add(song2);
 
 		when(mongoManager.getAll()).thenReturn(songList);
+		when(mongoManager.getAll()).thenReturn(songList);
 
-		songManager = new SongManager(mongoManager, getUserListenAmountSender);
+
 	}
 
 	@Test
@@ -60,6 +65,8 @@ class SongServiceApplicationTests {
 		assertNotNull(result);
 		assertEquals(song1, result);
 		assertEquals(100, result.getListenAmount());
+
+		songManager.clear();
 	}
 
 	@Test
@@ -67,6 +74,7 @@ class SongServiceApplicationTests {
 		Song result = songManager.getSong("Nonexistent Song");
 
 		assertNull(result);
+		songManager.clear();
 	}
 
 	@Test
@@ -78,6 +86,7 @@ class SongServiceApplicationTests {
 		assertNotNull(result);
 		assertEquals(song2, result);
 		assertEquals(200, result.getListenAmount());
+		songManager.clear();
 	}
 
 	@Test
@@ -85,6 +94,7 @@ class SongServiceApplicationTests {
 		Song result = songManager.getSong(UUID.randomUUID());
 
 		assertNull(result);
+		songManager.clear();
 	}
 
 	@Test
@@ -97,6 +107,7 @@ class SongServiceApplicationTests {
 		assertEquals(2, result.size());
 		assertEquals(150, result.get(0).getListenAmount());
 		assertEquals(150, result.get(1).getListenAmount());
+		songManager.clear();
 	}
 
 	@Test
@@ -106,7 +117,8 @@ class SongServiceApplicationTests {
 		songManager.addSong(newSong);
 
 		verify(mongoManager).add(newSong);
-		assertTrue(songList.contains(newSong));
+		assertTrue(songManager.getAllSongs().contains(newSong));
+		songManager.clear();
 	}
 
 	@Test
@@ -114,6 +126,7 @@ class SongServiceApplicationTests {
 		songManager.deleteSong(song1);
 
 		verify(mongoManager).delete(song1);
-		assertFalse(songList.contains(song1));
+		assertFalse(songManager.getAllSongs().contains(song1));
+		songManager.clear();
 	}
 }

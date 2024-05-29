@@ -24,14 +24,20 @@ public class SongManager {
     public SongManager(MongoManager mongoManager, GetUserListenAmountSender getUserListenAmountSender){
         this.mongoManager = mongoManager;
         this.getUserListenAmountSender = getUserListenAmountSender;
-        initializeSongs();
     }
 
     private void initializeSongs(){
-        songs = mongoManager.getAll();
+        if(songs == null) {
+            songs = mongoManager.getAll();
+        }
+    }
+
+    public void clear(){
+        songs = null;
     }
 
     public Song getSong(String title){
+        initializeSongs();
         for(Song song : songs){
             if(song.getTitle().equalsIgnoreCase(title)){
                 song.setListenAmount(getListenAmount(song.getId()));
@@ -42,6 +48,7 @@ public class SongManager {
     }
 
     public Song getSong(UUID id){
+        initializeSongs();
         for(Song song : songs){
             if(song.getId().equals(id)){
                 song.setListenAmount(getListenAmount(id));
@@ -52,6 +59,7 @@ public class SongManager {
     }
 
     public List<Song> getAllSongs(){
+        initializeSongs();
         for(Song song : songs) {
             song.setListenAmount(getListenAmount(song.getId()));
         }
@@ -59,15 +67,18 @@ public class SongManager {
     }
 
     public int getListenAmount(UUID songId){
+        initializeSongs();
         return getUserListenAmountSender.getListenAmount(songId);
     }
 
     public void addSong(Song song){
+        initializeSongs();
         songs.add(song);
         mongoManager.add(song);
     }
 
     public void deleteSong(Song song){
+        initializeSongs();
         songs.remove(song);
         mongoManager.delete(song);
     }
