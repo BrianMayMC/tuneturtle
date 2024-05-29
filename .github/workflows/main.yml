@@ -41,7 +41,7 @@ jobs:
       run: |
         for dir in song-service playlist-service user-service; do
           cd $dir
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=BrianMayMC_BrianMayMC
+          mvn -B verify -Dmongodb.url=mongodb://localhost:27017/ org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=BrianMayMC_BrianMayMC
           cd ..
         done
 
