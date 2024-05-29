@@ -17,7 +17,8 @@ import java.util.UUID;
 @RequestMapping("/api/playlist")
 public class PlaylistController {
 
-    @Autowired private PlaylistManager playlistManager;
+    @Autowired
+    private PlaylistManager playlistManager;
 
     @PostMapping("/")
     public void add(@RequestBody PlaylistCreateRequest request){
