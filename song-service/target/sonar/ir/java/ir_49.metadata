@@ -1,0 +1,2 @@
+me.nootnoot.songservice.entities.Song#<init>(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;[B)V
+java.util.UUID#randomUUID()Ljava/util/UUID;

@@ -1,0 +1,22 @@
+me.nootnoot.songservice.messaging.sender.GetUserListenAmountSender#getListenAmount(Ljava/util/UUID;)I
+me.nootnoot.songservice.messaging.obj.GetListenAmountsRequestMsg#instance-init#
+null
+java.lang.String#instance-init#
+com.google.gson.Gson#<init>()V
+org.springframework.amqp.core.MessageProperties#<init>()V
+com.google.gson.Gson#fromJson(Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/Object;
+java.lang.String#getBytes()[B
+org.springframework.amqp.core.Message#<init>([BLorg/springframework/amqp/core/MessageProperties;)V
+java.util.UUID#randomUUID()Ljava/util/UUID;
+java.util.UUID#toString()Ljava/lang/String;
+org.springframework.amqp.core.Message#instance-init#
+com.google.gson.Gson#instance-init#
+com.google.gson.Gson#toJson(Ljava/lang/Object;)Ljava/lang/String;
+java.lang.String#<init>([B)V
+org.springframework.amqp.core.MessageProperties#instance-init#
+==
+setCorrelationId org.springframework.amqp.core.MessageProperties#setCorrelationId(Ljava/lang/String;)V
+println java.io.PrintStream#println([C)V
+setReplyTo org.springframework.amqp.core.MessageProperties#setReplyTo(Ljava/lang/String;)V
+sendAndReceive org.springframework.amqp.rabbit.core.RabbitTemplate#sendAndReceive(Ljava/lang/String;Lorg/springframework/amqp/core/Message;)Lorg/springframework/amqp/core/Message;
+getBody org.springframework.amqp.core.Message#getBody()[B

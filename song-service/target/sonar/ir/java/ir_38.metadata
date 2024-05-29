@@ -1,0 +1,5 @@
+me.nootnoot.songservice.controllers.SongController#getAll()Lme/nootnoot/songservice/controllers/responses/GetAllSongsResponse;
+null
+me.nootnoot.songservice.controllers.responses.GetAllSongsResponse#instance-init#
+==
+getAllSongs me.nootnoot.songservice.managers.SongManager#getAllSongs()Ljava/util/List;

@@ -19,25 +19,26 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class UserServiceApplicationTests {
 
-	@Mock
+	@MockBean
 	private MongoManager mongoManager;
 
-	@Mock
+	@MockBean
 	private UserPlaylistMessageSender messageHandler;
 
-	@Mock
+	@MockBean
 	private UserLikedSongsMessageSender userLikedSongsMessageSender;
 
-	@InjectMocks
+	@Autowired
 	private UserManager userManager;
 
-	private List<User> userList;
 	private User user1;
 	private User user2;
 
@@ -46,14 +47,11 @@ class UserServiceApplicationTests {
 		user1 = new User("User 1", "user1@gmail.com", UserRole.ROLE_ADMIN, RegistrationSource.GITHUB);
 		user2 = new User("User 2", "user2@gmail.com", UserRole.ROLE_ADMIN, RegistrationSource.GITHUB);
 
-		userList = new ArrayList<>();
+		List<User> userList = new ArrayList<>();
 		userList.add(user1);
 		userList.add(user2);
 
 		when(mongoManager.getUsers()).thenReturn(userList);
-
-		// Manually initialize UserManager to call the constructor with mocks
-		userManager = new UserManager(mongoManager, messageHandler, userLikedSongsMessageSender);
 	}
 
 	@Test
@@ -65,6 +63,7 @@ class UserServiceApplicationTests {
 
 		assertTrue(user1.getLikedSongIds().contains(songId));
 		verify(mongoManager).updateUser(user1);
+		userManager.clear();
 	}
 
 	@Test
@@ -82,6 +81,7 @@ class UserServiceApplicationTests {
 		List<Song> result = userManager.getLikedSongs(user1.getName());
 
 		assertEquals(songs, result);
+		userManager.clear();
 	}
 
 	@Test
@@ -97,6 +97,7 @@ class UserServiceApplicationTests {
 		List<Playlist> result = userManager.getPlaylists(user1.getName());
 
 		assertEquals(playlists, result);
+		userManager.clear();
 	}
 
 
@@ -108,6 +109,7 @@ class UserServiceApplicationTests {
 		User result = userManager.getUser(username);
 
 		assertEquals(user1, result);
+		userManager.clear();
 	}
 
 	@Test
@@ -122,6 +124,7 @@ class UserServiceApplicationTests {
 		assertEquals(artistName, user1.getArtistName());
 		assertEquals(artistProfilePicture, user1.getArtistProfilePicture());
 		verify(mongoManager).updateUser(user1);
+		userManager.clear();
 	}
 
 	@Test
@@ -133,6 +136,7 @@ class UserServiceApplicationTests {
 
 		assertEquals(1, user1.getSongListenAmounts().get(songId));
 		verify(mongoManager).updateUser(user1);
+		userManager.clear();
 	}
 
 	@Test
@@ -144,6 +148,7 @@ class UserServiceApplicationTests {
 		int result = userManager.getListenAmounts(songId);
 
 		assertEquals(8, result);
+		userManager.clear();
 	}
 
 	@Test
@@ -153,6 +158,7 @@ class UserServiceApplicationTests {
 		boolean result = userManager.isAdmin(username);
 
 		assertFalse(result);
+		userManager.clear();
 	}
 
 	@Test
@@ -162,6 +168,7 @@ class UserServiceApplicationTests {
 		boolean result = userManager.isArtist(user1.getName());
 
 		assertTrue(result);
+		userManager.clear();
 	}
 
 	@Test
@@ -172,6 +179,7 @@ class UserServiceApplicationTests {
 
 		assertTrue(result.isPresent());
 		assertEquals(user1, result.get());
+		userManager.clear();
 	}
 
 	@Test
@@ -181,6 +189,7 @@ class UserServiceApplicationTests {
 		userManager.save(user);
 
 		verify(mongoManager).saveUser(user);
+		userManager.clear();
 	}
 
 }

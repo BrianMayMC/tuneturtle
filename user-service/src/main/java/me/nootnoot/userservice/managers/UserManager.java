@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Service
 public class UserManager {
-    private final List<User> users;
+    private List<User> users;
     private final MongoManager mongoManager;
     private final UserPlaylistMessageSender messageHandler;
     private final UserLikedSongsMessageSender userLikedSongsMessageSender;
@@ -26,10 +26,16 @@ public class UserManager {
         this.mongoManager = mongoManager;
         this.messageHandler = messageHandler;
         this.userLikedSongsMessageSender = userLikedSongsMessageSender;
-        this.users = mongoManager.getUsers();
+    }
+
+    private void initializeUsers(){
+        if(users == null) {
+            users = mongoManager.getUsers();
+        }
     }
 
     public void addLikedSong(String username, UUID songId){
+        initializeUsers();
         users.forEach(user -> {
             if(user.getName().equalsIgnoreCase(username)){
                 user.getLikedSongIds().add(songId);
@@ -39,6 +45,7 @@ public class UserManager {
     }
 
     public List<Song> getLikedSongs(String username){
+        initializeUsers();
         System.out.println("username: " + username);
         for(User user : users){
             System.out.println(user.getName());
@@ -51,6 +58,7 @@ public class UserManager {
     }
 
     public List<Playlist> getPlaylists(String username){
+        initializeUsers();
         for(User user : users){
             if(user.getName().equalsIgnoreCase(username)){
                 return messageHandler.getUserPlaylists(user.getId());
@@ -60,6 +68,7 @@ public class UserManager {
     }
 
     public User getUser(String username){
+        initializeUsers();
         for(User user : users){
             if(user.getName().equalsIgnoreCase(username)){
                 return user;
@@ -69,6 +78,7 @@ public class UserManager {
     }
 
     public void makeArtist(String username, String artistName, String artistProfilePicture){
+        initializeUsers();
         users.forEach(user -> {
             if(user.getName().equalsIgnoreCase(username)){
                 user.setArtist(true);
@@ -80,6 +90,7 @@ public class UserManager {
     }
 
     public void addListen(String username, UUID songId) {
+        initializeUsers();
         for (User user : users) {
             if(user.getName().equalsIgnoreCase(username)){
                 user.getSongListenAmounts().put(songId, user.getSongListenAmounts().getOrDefault(songId, 0L) + 1);
@@ -89,6 +100,7 @@ public class UserManager {
     }
 
     public int getListenAmounts(UUID songId) {
+        initializeUsers();
         int amount = 0;
         for(User user : users){
             amount += user.getSongListenAmounts().getOrDefault(songId, 0L);
@@ -101,6 +113,7 @@ public class UserManager {
     }
 
     public boolean isArtist(String username){
+        initializeUsers();
         for(User user : users){
             if(user.getName().equalsIgnoreCase(username) && user.isArtist()){
                 return true;
@@ -111,6 +124,7 @@ public class UserManager {
 
 
     public Optional<User> findByName(String name){
+        initializeUsers();
         for(User user : mongoManager.getUsers()){
             if(user.getName().equalsIgnoreCase(name)){
                 return Optional.of(user);
@@ -120,6 +134,11 @@ public class UserManager {
     }
 
     public void save(User user){
+        initializeUsers();
         mongoManager.saveUser(user);
+    }
+
+    public void clear(){
+        users = null;
     }
 }

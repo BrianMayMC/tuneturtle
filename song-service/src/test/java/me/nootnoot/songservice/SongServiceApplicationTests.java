@@ -51,7 +51,6 @@ class SongServiceApplicationTests {
 		songList.add(song2);
 
 		when(mongoManager.getAll()).thenReturn(songList);
-		when(mongoManager.getAll()).thenReturn(songList);
 
 
 	}

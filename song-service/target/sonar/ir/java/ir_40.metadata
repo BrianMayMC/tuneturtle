@@ -1,0 +1,5 @@
+me.nootnoot.songservice.controllers.SongController#addSong(Lme/nootnoot/songservice/controllers/requests/CreateSongRequest;)V
+me.nootnoot.songservice.entities.Song#instance-init#
+me.nootnoot.songservice.entities.Song#<init>(Ljava/util/UUID;Ljava/lang/String;Ljava/lang/String;[B)V
+==
+addSong me.nootnoot.songservice.managers.SongManager#addSong(Lme/nootnoot/songservice/entities/Song;)V

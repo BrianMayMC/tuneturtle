@@ -11,7 +11,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -24,20 +27,20 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
+@ExtendWith(SpringExtension.class)
 @ExtendWith(MockitoExtension.class)
 class PlaylistServiceApplicationTests {
 
 
-	@Mock
+	@MockBean
 	private MongoManager mongoManager;
 
-	@Mock
+	@MockBean
 	private GetPlaylistSongsSender getPlaylistSongsSender;
 
-	@InjectMocks
+	@Autowired
 	private PlaylistManager playlistManager;
 
-	private List<Playlist> playlistList;
 	private Playlist playlist1;
 	private Playlist playlist2;
 
@@ -46,14 +49,11 @@ class PlaylistServiceApplicationTests {
 		playlist1 = new Playlist("Playlist 1", UUID.randomUUID(), new ArrayList<>());
 		playlist2 = new Playlist("Playlist 2", UUID.randomUUID(), new ArrayList<>());
 
-		playlistList = new ArrayList<>();
+		List<Playlist> playlistList = new ArrayList<>();
 		playlistList.add(playlist1);
 		playlistList.add(playlist2);
 
 		when(mongoManager.getAll()).thenReturn(playlistList);
-
-		// Manually initialize PlaylistManager to call the constructor with mocks
-		playlistManager = new PlaylistManager(mongoManager, getPlaylistSongsSender);
 	}
 
 	@Test
@@ -63,7 +63,8 @@ class PlaylistServiceApplicationTests {
 		playlistManager.add(newPlaylist);
 
 		verify(mongoManager).add(newPlaylist);
-		assertTrue(playlistList.contains(newPlaylist));
+		assertTrue(playlistManager.getAll().contains(newPlaylist));
+		playlistManager.clear();
 	}
 
 	@Test
@@ -72,7 +73,8 @@ class PlaylistServiceApplicationTests {
 		playlistManager.remove(playlistId);
 
 		verify(mongoManager).delete(playlistId);
-		assertFalse(playlistList.contains(playlist1));
+		assertFalse(playlistManager.getAll().contains(playlist1));
+		playlistManager.clear();
 	}
 
 	@Test
@@ -84,6 +86,7 @@ class PlaylistServiceApplicationTests {
 
 		assertTrue(playlist1.getSongIds().contains(songId));
 		verify(mongoManager).update(playlist1);
+		playlistManager.clear();
 	}
 
 	@Test
@@ -96,6 +99,7 @@ class PlaylistServiceApplicationTests {
 
 		assertFalse(playlist1.getSongIds().contains(songId));
 		verify(mongoManager).update(playlist1);
+		playlistManager.clear();
 	}
 
 	@Test
@@ -108,6 +112,7 @@ class PlaylistServiceApplicationTests {
 		assertEquals(1, result.size());
 		assertTrue(result.contains(playlist1));
 		assertFalse(result.contains(playlist2));
+		playlistManager.clear();
 	}
 
 	@Test
@@ -122,6 +127,7 @@ class PlaylistServiceApplicationTests {
 
 		assertNotNull(result);
 		assertEquals(songs, result);
+		playlistManager.clear();
 	}
 
 }

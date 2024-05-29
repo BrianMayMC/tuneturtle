@@ -1,0 +1,5 @@
+me.nootnoot.songservice.storage.MongoManager#delete(Lme/nootnoot/songservice/entities/Song;)V
+org.bson.Document#instance-init#
+org.bson.Document#<init>(Ljava/lang/String;Ljava/lang/Object;)V
+==
+deleteOne com.mongodb.client.MongoCollection#deleteOne(Lorg/bson/conversions/Bson;)Lcom/mongodb/client/result/DeleteResult;

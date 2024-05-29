@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: song-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: song-service
@@ -31,7 +31,7 @@ kind: Deployment
 metadata:
   name: user-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: user-service
@@ -59,7 +59,7 @@ kind: Deployment
 metadata:
   name: playlist-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: playlist-service

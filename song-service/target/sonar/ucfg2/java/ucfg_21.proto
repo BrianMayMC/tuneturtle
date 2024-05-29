@@ -1,0 +1,20 @@
+
+~me.nootnoot.songservice.controllers.SongController#getAll()Lme/nootnoot/songservice/controllers/responses/GetAllSongsResponse;‰
+C:/Users/msint/Desktop/tuneturtle/tuneturtle/song-service/src/main/java/me/nootnoot/songservice/controllers/SongController.java (%"1*£
+1' (2¬
+©
+' (22
+%0,me.nootnoot.songservice.managers.SongManager"__id*c
+
+__unknown_file (G*E4
+2me.nootnoot.songservice.controllers.SongController"
+songManagerÐÍ
+' (@
+%1java.util.List"Jme.nootnoot.songservice.managers.SongManager#getAllSongs()Ljava/util/List;*P
+
+__unknown_file (4
+2
+%0,me.nootnoot.songservice.managers.SongManager2getAllSongs()"
+ (B
+""B64
+2me.nootnoot.songservice.controllers.SongControllerH

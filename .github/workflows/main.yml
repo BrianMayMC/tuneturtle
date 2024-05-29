@@ -75,7 +75,7 @@ jobs:
 
     - name: Start ZAP daemon
       run: |
-        docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://127.0.0.1
+        docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://172.29.33.72/
 
 
 

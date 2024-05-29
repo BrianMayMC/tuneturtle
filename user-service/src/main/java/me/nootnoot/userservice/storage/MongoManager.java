@@ -35,6 +35,8 @@ public class MongoManager {
     }
 
 
+
+
     public void saveUser(User user){
         Document current = userCollection.find(new Document("name", user.getName())).first();
         if(current == null) {
