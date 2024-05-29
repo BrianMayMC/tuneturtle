@@ -11,12 +11,14 @@ import me.nootnoot.userservice.entities.User;
 import me.nootnoot.userservice.entities.UserRole;
 import org.bson.Document;
 import org.bson.UuidRepresentation;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class MongoManager {
 
     private final MongoCollection<Document> userCollection;

@@ -13,15 +13,21 @@ import java.util.UUID;
 
 @Service
 public class SongManager {
-    private final List<Song> songs = new ArrayList<>();
+    private List<Song> songs;
 
     @Autowired
     private GetUserListenAmountSender getUserListenAmountSender;
 
     private final MongoManager mongoManager;
 
-    public SongManager(){
-        mongoManager = new MongoManager();
+    @Autowired
+    public SongManager(MongoManager mongoManager, GetUserListenAmountSender getUserListenAmountSender){
+        this.mongoManager = mongoManager;
+        this.getUserListenAmountSender = getUserListenAmountSender;
+        initializeSongs();
+    }
+
+    private void initializeSongs(){
         songs = mongoManager.getAll();
     }
 

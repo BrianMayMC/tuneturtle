@@ -9,11 +9,13 @@ import com.mongodb.client.MongoDatabase;
 import me.nootnoot.playlistservice.entities.Playlist;
 import org.bson.Document;
 import org.bson.UuidRepresentation;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class MongoManager {
 
     private final MongoCollection<Document> playlistCollection;
@@ -43,7 +45,7 @@ public class MongoManager {
             return;
         }
 
-        playlistCollection.updateOne(current, new Document("_id", playlist.getId())
+        playlistCollection.replaceOne(current, new Document("_id", playlist.getId())
                 .append("name", playlist.getName())
                 .append("ownerId", playlist.getOwnerId())
                 .append("song-ids", playlist.getSongIds()));

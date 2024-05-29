@@ -14,16 +14,20 @@ import java.util.UUID;
 
 @Service
 public class PlaylistManager {
-    private final List<Playlist> playlists;
 
+    private List<Playlist> playlists;
     private final MongoManager mongoManager;
+    private final GetPlaylistSongsSender getPlaylistSongsSender;
 
     @Autowired
-    private GetPlaylistSongsSender getPlaylistSongsSender;
+    public PlaylistManager(MongoManager mongoManager, GetPlaylistSongsSender getPlaylistSongsSender) {
+        this.mongoManager = mongoManager;
+        this.getPlaylistSongsSender = getPlaylistSongsSender;
+        initializePlaylists();
+    }
 
-    public PlaylistManager(){
-        mongoManager = new MongoManager();
-        playlists = mongoManager.getAll();
+    private void initializePlaylists() {
+        this.playlists = mongoManager.getAll();
     }
 
     public void add(Playlist playlist){

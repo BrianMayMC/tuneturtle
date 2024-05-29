@@ -5,6 +5,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
+  ingressClassName: nginx
   rules:
      - http:
         paths:
@@ -29,3 +30,10 @@ spec:
                 name: playlist-service-svc #the service we should point to
                 port:
                   number: 1113
+          - path: /grafana #the external path we want for our service
+            pathType: Prefix
+            backend:
+              service:
+                name: grafana #the service we should point to
+                port:
+                  number: 3000

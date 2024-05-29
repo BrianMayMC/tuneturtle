@@ -18,15 +18,15 @@ import java.util.UUID;
 public class UserManager {
     private final List<User> users;
     private final MongoManager mongoManager;
+    private final UserPlaylistMessageSender messageHandler;
+    private final UserLikedSongsMessageSender userLikedSongsMessageSender;
 
     @Autowired
-    private UserPlaylistMessageSender messageHandler;
-    @Autowired
-    private UserLikedSongsMessageSender userLikedSongsMessageSender;
-
-    public UserManager(){
-        mongoManager = new MongoManager();
-        users = mongoManager.getUsers();
+    public UserManager(MongoManager mongoManager, UserPlaylistMessageSender messageHandler, UserLikedSongsMessageSender userLikedSongsMessageSender) {
+        this.mongoManager = mongoManager;
+        this.messageHandler = messageHandler;
+        this.userLikedSongsMessageSender = userLikedSongsMessageSender;
+        this.users = mongoManager.getUsers();
     }
 
     public void addLikedSong(String username, UUID songId){
@@ -111,6 +111,11 @@ public class UserManager {
 
 
     public Optional<User> findByName(String name){
+        for(User user : mongoManager.getUsers()){
+            if(user.getName().equalsIgnoreCase(name)){
+                return Optional.of(user);
+            }
+        }
         return mongoManager.findUserByName(name);
     }
 

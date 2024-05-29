@@ -29,12 +29,8 @@ public class SongController {
 
     @PostMapping("/")
     public void addSong(@RequestBody CreateSongRequest request){
-        try {
-            byte[] bytes = request.getSongData().getBytes();
-            songManager.addSong(new Song(request.getArtistId(), request.getPictureData(), request.getTitle(), bytes));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        byte[] bytes = request.getSongData();
+        songManager.addSong(new Song(request.getArtistId(), request.getPictureData(), request.getTitle(), bytes));
     }
 
     @DeleteMapping("/{title}")

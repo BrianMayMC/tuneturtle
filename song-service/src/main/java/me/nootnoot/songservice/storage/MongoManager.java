@@ -9,11 +9,13 @@ import com.mongodb.client.MongoDatabase;
 import me.nootnoot.songservice.entities.Song;
 import org.bson.Document;
 import org.bson.UuidRepresentation;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class MongoManager {
 
     private final MongoCollection<Document> songCollection;
@@ -25,6 +27,7 @@ public class MongoManager {
                 .applyConnectionString(new ConnectionString(url != null ? url : "mongodb://localhost:27017/"))
                 .uuidRepresentation(UuidRepresentation.STANDARD).build();
         MongoClient mongoClient = MongoClients.create(settings);
+
         MongoDatabase database = mongoClient.getDatabase("songs");
         songCollection = database.getCollection("song-data");
     }

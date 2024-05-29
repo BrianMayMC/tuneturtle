@@ -14,13 +14,17 @@ spec:
     spec:
       containers:
       - name: song-service
-        image: devnootnoot/song-service:latest
+        image: brianmaymc/song-service:latest
         ports:
           - protocol: TCP
             containerPort: 8080
         env:
           - name: SERVER_SERVLET_CONTEXT_PATH
             value: "/song"
+          - name: MONGODB_URL
+            value: mongodb://mongo:27017/
+          - name: SPRING_RABBITMQ_HOST
+            value: rabbitmq
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -38,13 +42,17 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: devnootnoot/user-service:latest
+        image: brianmaymc/user-service:latest
         ports:
           - protocol: TCP
             containerPort: 8081
         env:
           - name: SERVER_SERVLET_CONTEXT_PATH
             value: "/user"
+          - name: MONGODB_URL
+            value: mongodb://mongo:27017/
+          - name: SPRING_RABBITMQ_HOST
+            value: rabbitmq
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -62,10 +70,14 @@ spec:
     spec:
       containers:
       - name: playlist-service
-        image: devnootnoot/playlist-service:latest
+        image: brianmaymc/playlist-service:latest
         ports:
           - protocol: TCP
             containerPort: 8082
         env:
           - name: SERVER_SERVLET_CONTEXT_PATH
             value: "/playlist"
+          - name: MONGODB_URL
+            value: mongodb://mongo:27017/
+          - name: SPRING_RABBITMQ_HOST
+            value: rabbitmq
