@@ -1,9 +1,0 @@
-me.nootnoot.songservice.storage.MongoManager#update(Lme/nootnoot/songservice/entities/Song;)V
-org.bson.Document#instance-init#
-org.bson.Document#<init>(Ljava/lang/String;Ljava/lang/Object;)V
-==
-first com.mongodb.client.MongoIterable#first()Ljava/lang/Object;
-find com.mongodb.client.MongoCollection#find(Lorg/bson/conversions/Bson;)Lcom/mongodb/client/FindIterable;
-append org.bson.Document#append(Ljava/lang/String;Ljava/lang/Object;)Lorg/bson/Document;
-updateOne com.mongodb.client.MongoCollection#updateOne(Lorg/bson/conversions/Bson;Lorg/bson/conversions/Bson;)Lcom/mongodb/client/result/UpdateResult;
-add me.nootnoot.songservice.storage.MongoManager#add(Lme/nootnoot/songservice/entities/Song;)V

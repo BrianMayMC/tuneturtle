@@ -1,1 +1,0 @@
-me.nootnoot.songservice.managers.SongManager#<init>(Lme/nootnoot/songservice/storage/MongoManager;Lme/nootnoot/songservice/messaging/sender/GetUserListenAmountSender;)V

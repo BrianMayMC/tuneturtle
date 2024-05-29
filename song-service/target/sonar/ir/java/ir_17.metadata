@@ -1,6 +1,0 @@
-me.nootnoot.songservice.storage.MongoManager#add(Lme/nootnoot/songservice/entities/Song;)V
-org.bson.Document#instance-init#
-org.bson.Document#<init>(Ljava/lang/String;Ljava/lang/Object;)V
-==
-append org.bson.Document#append(Ljava/lang/String;Ljava/lang/Object;)Lorg/bson/Document;
-insertOne com.mongodb.client.MongoCollection#insertOne(Ljava/lang/Object;)Lcom/mongodb/client/result/InsertOneResult;

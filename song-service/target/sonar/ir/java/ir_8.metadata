@@ -1,5 +1,0 @@
-me.nootnoot.songservice.managers.SongManager#addSong(Lme/nootnoot/songservice/entities/Song;)V
-me.nootnoot.songservice.managers.SongManager#initializeSongs()V
-==
-add java.util.List#add(Ljava/lang/Object;)Z
-add me.nootnoot.songservice.storage.MongoManager#add(Lme/nootnoot/songservice/entities/Song;)V

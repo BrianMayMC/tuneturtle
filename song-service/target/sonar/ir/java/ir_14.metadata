@@ -1,3 +1,0 @@
-me.nootnoot.songservice.messaging.receiver.UserLikedSongsMessageReceiver#likedSongsReceiveQueue()Lorg/springframework/amqp/core/Queue;
-org.springframework.amqp.core.Queue#instance-init#
-org.springframework.amqp.core.Queue#<init>(Ljava/lang/String;ZZZ)V

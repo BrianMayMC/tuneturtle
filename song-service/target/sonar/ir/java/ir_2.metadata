@@ -1,3 +1,0 @@
-me.nootnoot.songservice.managers.SongManager#initializeSongs()V
-==
-getAll me.nootnoot.songservice.storage.MongoManager#getAll()Ljava/util/List;

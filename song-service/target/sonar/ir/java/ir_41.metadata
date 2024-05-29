@@ -1,4 +1,0 @@
-me.nootnoot.songservice.controllers.SongController#deleteSong(Ljava/lang/String;)V
-==
-deleteSong me.nootnoot.songservice.managers.SongManager#deleteSong(Lme/nootnoot/songservice/entities/Song;)V
-getSong me.nootnoot.songservice.managers.SongManager#getSong(Ljava/lang/String;)Lme/nootnoot/songservice/entities/Song;
