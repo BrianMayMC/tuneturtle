@@ -91,5 +91,5 @@ jobs:
         run: az login --service-principal --username ${{ secrets.AZURE_CLIENT_ID }} --password ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
       - name: Get AKS credentials
         run: az aks get-credentials --resource-group tuneturtle-aks_group --name tuneturtle
-      - name: Apply files
+      - name: Apply files 
         run: kubectl apply -f ./kubernetes
