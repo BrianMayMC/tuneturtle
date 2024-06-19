@@ -22,6 +22,6 @@ public class CqrsEventSourcingPocApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		orderService.createOrder("1", "ProductA");
 		System.out.println("Order created!");
-		System.out.println(orderService.getOrder("1"));
+		System.out.println("Product Found: " + orderService.getOrder("1").getProduct());
 	}
 }
